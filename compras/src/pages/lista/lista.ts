@@ -25,7 +25,7 @@ export class ListaPage {
     public alertCtrl: AlertController,
     public arquivo: ArquivoProvider
     ) {
-      this.lista = this.arquivo.getLista();
+      this.lista = this.arquivo.getLista().total;
   }
 
   ionViewDidLoad() {

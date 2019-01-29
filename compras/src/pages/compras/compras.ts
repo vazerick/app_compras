@@ -17,7 +17,10 @@ import { ArquivoProvider } from '../../providers/arquivo/arquivo'
 })
 export class ComprasPage {
 
-  lista = [];
+  lista = {
+    comprado: [],
+    fila: []
+  };
   lista_comprado = [];
   lista_fila = [];
 
@@ -28,39 +31,43 @@ export class ComprasPage {
     public alertCtrl: AlertController,
     public arquivo: ArquivoProvider
     ) {
-      this.lista = this.arquivo.getLista();
-      console.log(this.lista)
+      // this.lista = this.arquivo.getLista();
+      // this.lista_comprado = this.arquivo.getLista().comprado;
+      // this.lista_fila = this.arquivo.getLista().fila;
       this.atualiza();          
   }
 
   atualiza(){
-    this.lista_comprado = [];
-    this.lista_fila = [];
-    console.log("Atualiza!", this.lista);
-    this.lista.forEach( item =>{
-      console.log("loop", item);
-      if (item.valor == "") {
-        console.log("Inicio do if Fila");
-        console.log("Fila:", item)
-        this.lista_fila.push({
-          nome: item.nome, 
-          valor: "",
-        });        
-        console.log("Lista fila:", this.lista_fila);        
-        console.log("Fim do if Fila");
-      } else {
-        console.log("Comprado");
-        this.lista_comprado.push({
-          nome: item.nome,
-          valor: item.valor
-        });
-      }
-    });
-    
+    console.log("Atualiza");
+    this.lista = this.arquivo.getLista();
+    this.lista_comprado = this.arquivo.getLista().comprado;    
+    this.lista_fila = this.arquivo.getLista().fila;        
   }
+  
 
-  foo(){
-    this.atualiza();
+  comprar(item) {
+    let prompt = this.alertCtrl.create({
+      title: 'Comprar '+item.nome,
+      inputs: [{
+        name: 'Valor',
+        type: 'number',
+        placeholder: '0'
+      }],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Adicionar',
+          handler: data => {                    
+            this.arquivo.addValor(item, data.Valor).then( data => this.atualiza());            
+          }
+        }
+      ]
+    });    
+    prompt.present().then( data => {
+      console.log("Dados:", data);
+    });        
   }
 
   ionViewDidLoad() {

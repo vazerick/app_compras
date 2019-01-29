@@ -14,23 +14,30 @@
 
 
 <ion-content padding>
+
+  Gasto: 
+
+  <br/>
+
+  <h3>Lista de Compras</h3>
+
   <ion-grid>
-      <ion-row ion-button (click)="foo()" *ngFor="let item of lista">
+      <ion-row ion-button (click)="comprar(item)" *ngFor="let item of lista_fila">
         <ion-col>
-          {{item.nome}}
-        </ion-col>
-        <ion-col>          
+          {{item.nome}}          
         </ion-col>
       </ion-row>
   </ion-grid>
+
+  <h3>Itens Comprados</h3>
+
   <ion-grid>
-      <ion-row ion-button (click)="foo()" *ngFor="let item of lista_fila">
+      <ion-row ion-button (click)="comprar(item)" *ngFor="let item of lista_comprado">
         <ion-col>
           {{item.nome}}
         </ion-col>
         <ion-col>
           R${{item.valor}}
-          <!-- ion-button (click)="foo()" -->
         </ion-col>
       </ion-row>
   </ion-grid>

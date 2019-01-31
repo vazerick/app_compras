@@ -18,10 +18,6 @@ import { templateSourceUrl } from '@angular/compiler';
 })
 export class ComprasPage {
 
-  lista = {
-    comprado: [],
-    fila: []
-  };
   lista_comprado = [];
   lista_fila = [];
   gasto = 0;
@@ -40,25 +36,17 @@ export class ComprasPage {
   atualiza(){
     console.log("Atualiza");  // todo tornar as listas uma promise para poupar processamento
     this.gasto = 0;  
-    this.lista = this.arquivo.getLista();
-    this.lista_fila = this.arquivo.getLista().fila;        
-    this.lista_comprado = this.arquivo.getLista().comprado;
-    this.arquivo.storage.forEach( element => {
-      this.gasto += Number(element.valor);    
-    }).then(data => this.resta = this.limite - this.gasto);
+    this.arquivo.getLista().then( data => {
+      this.lista_comprado = data.comprado;
+      this.lista_fila = data.fila;
+    });
+    this.arquivo.getGasto().then( data => {
+      this.gasto = data;
+      this.resta = this.limite - this.gasto
+    });
     this.arquivo.getLimite().then( data => this.limite = data.valor);
   }
   
-  promiseComprado() {
-    return new Promise ( resolve => {      
-      this.lista_comprado = this.arquivo.getLista().comprado;
-      this.lista_comprado.forEach( element => {
-        console.log("Valor", element.valor);
-      } )
-      resolve();
-    })
-  }
-
   comprar(item) {
     let prompt = this.alertCtrl.create({
       title: 'Comprar '+item.nome,

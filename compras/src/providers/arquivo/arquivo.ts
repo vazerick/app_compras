@@ -48,35 +48,49 @@ export class ArquivoProvider {
 
   getLista() {
     // return "get Lista"
-    var lista = [];
-    var lista_comprado = [];
-    var lista_fila = [];
-    this.storage.forEach( (element, key) => {
-      if (key!="x") {
-        if (element.valor == ""){
-          lista_fila.push({          
-            nome: element.nome,
-            chave: key
-          });
-        } else {
-          lista_comprado.push({
+    return new Promise (resolve => {
+      var lista = [];
+      var lista_comprado = [];
+      var lista_fila = [];
+      this.storage.forEach( (element, key) => {
+        if (key!="x") {
+          if (element.valor == ""){
+            lista_fila.push({          
+              nome: element.nome,
+              chave: key
+            });
+          } else {
+            lista_comprado.push({
+              nome: element.nome,
+              valor: element.valor,
+              chave: key
+            });
+          };
+          lista.push({
             nome: element.nome,
             valor: element.valor,
             chave: key
-          });
-        };
-        lista.push({
-          nome: element.nome,
-          valor: element.valor,
-          chave: key
-        }) 
-      }      
+          }) 
+        }      
+      });
+      resolve ({
+        total: lista,
+        comprado: lista_comprado,
+        fila: lista_fila
+      });
     });
-    return {
-      total: lista,
-      comprado: lista_comprado,
-      fila: lista_fila
-    };
+    
+  }
+
+  getGasto() {
+    return new Promise (resolve => {
+      var gasto = 0;
+      this.storage.forEach( (element, key) => {
+        if (key!="x" && element.valor!=""){
+          gasto += Number(element.valor);
+        }
+      }).then(data => resolve(gasto));
+    });
   }
 
   limpar(){

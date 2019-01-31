@@ -1,3 +1,18 @@
 page-compras {
-
+    .active {
+        background: yellow;
+    }
+    .status{
+        background: blue;
+    }
+    .cabecalho{
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;        
+        .item{
+            background: rgba(255,255,255,0.7)
+        }
+    }
 }

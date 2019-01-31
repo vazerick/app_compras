@@ -14,42 +14,63 @@
 
 
 <ion-content padding>
-
-  <ion-grid>
-    <ion-row ion-button (click)="setLimite()">
-      <ion-col>
-        Limite: R${{limite}}
+<div class="status">
+  <ion-grid class="cabecalho">
+    <ion-item text-wrap justify-content: center>      
+        Limite: {{limite | currency:'BRL'}}
+        <button ion-button outline item-end (click)="setLimite()" icon-only danger>
+          <ion-icon name="create"></ion-icon>
+        </button>
+    </ion-item>        
+    <ion-item text-wrap justify-content: center>
+      <ion-col>  
+        Gasto: {{gasto | currency:'BRL'}}
       </ion-col>
       <ion-col>
-        Gasto: R${{gasto}}
-      </ion-col>      
-      <ion-col>
-        Resta: R${{resta}}
-      </ion-col>
-    </ion-row>
+        Resta: {{resta | currency:'BRL'}}
+      </ion-col>            
+    </ion-item>        
   </ion-grid>
+</div>
+
+<h1>
+  Teste
+</h1>
+<li *ngFor="let item of items" 
+    (click)="toggleClass(item)" 
+    [ngClass]="{'active': item.active}">{{ item.name }}</li>
 
   <h3>Lista de Compras</h3>
 
   <ion-grid>
-      <ion-row ion-button (click)="comprar(item)" *ngFor="let item of lista_fila">
-        <ion-col>
-          {{item.nome}}          
-        </ion-col>
-      </ion-row>
+    <ion-row ion-button (click)="comprar(item)" *ngFor="let item of lista_fila">
+      <ion-col>
+        {{item.nome}}          
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
   <h3>Itens Comprados</h3>
 
-  <ion-grid>
-      <ion-row ion-button (click)="editar(item)" *ngFor="let item of lista_comprado">
-        <ion-col>
+    <ion-item *ngFor="let item of lista_comprado" >
+      <ion-row justify-content:center align-items-center>      
+        <ion-col col-5 text-wrap size="auto">
           {{item.nome}}
         </ion-col>
-        <ion-col>
-          R${{item.valor}}
+        <ion-col col-3>
+          {{item.valor | currency:'BRL'}}
         </ion-col>
-      </ion-row>
-  </ion-grid>
+        <ion-col col-2>
+          <button ion-button outline (click)="editar(item)" icon-only danger>
+            <ion-icon name="create"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button (click)="editar(item)" icon-only danger>
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-col>            
+    </ion-row>
+  </ion-item>    
 
 </ion-content>

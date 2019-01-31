@@ -24,6 +24,12 @@ export class ComprasPage {
   limite = 0;
   resta = 0;
 
+  items = [
+    {name:'one', active:false},
+    {name:'two', active:false},
+    {name:'three', active:false},
+  ];
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -36,7 +42,7 @@ export class ComprasPage {
   atualiza(){
     console.log("Atualiza");  // todo tornar as listas uma promise para poupar processamento
     this.gasto = 0;  
-    this.arquivo.getLista().then( data => {
+    this.arquivo.getLista().then( data => {      
       this.lista_comprado = data.comprado;
       this.lista_fila = data.fila;
     });
@@ -130,6 +136,10 @@ export class ComprasPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ComprasPage');
+  }
+
+  toggleClass(item){
+    item.active = !item.active;
   }
 
 }

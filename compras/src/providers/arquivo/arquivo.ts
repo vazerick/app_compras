@@ -7,9 +7,10 @@ import { Item } from 'ionic-angular';
 export class ArquivoProvider {
 
   constructor(public storage: Storage) { 
+    this.addLimite(0);
   }
 
-  salva(lista: Array<any>) {
+  salva(lista: Array<any>) {    
     this.limpar();
     lista.forEach( (value: string, index: number) => {
       console.log(value, ": ", index)
@@ -17,8 +18,22 @@ export class ArquivoProvider {
       chave = index.toString();
       while (chave.length < 3) chave = "0" + chave;
       this.storage.set(chave , value);
-    });
-    
+    });    
+  }
+
+  addLimite (valor) {
+    return new Promise (resolve => {
+      var limite = {
+        nome: "limite",
+        valor: valor,
+        chave: "x"
+      };
+      this.storage.set("x", limite).then(data => resolve());
+    })    
+  }
+
+  getLimite(){
+    return this.storage.get("x");
   }
 
   addValor(item, valor) {
@@ -36,24 +51,26 @@ export class ArquivoProvider {
     var lista = [];
     var lista_comprado = [];
     var lista_fila = [];
-    this.storage.forEach( (element, key) => {            
-      if (element.valor == ""){
-        lista_fila.push({          
-          nome: element.nome,
-          chave: key
-        });
-      } else {
-        lista_comprado.push({
+    this.storage.forEach( (element, key) => {
+      if (key!="x") {
+        if (element.valor == ""){
+          lista_fila.push({          
+            nome: element.nome,
+            chave: key
+          });
+        } else {
+          lista_comprado.push({
+            nome: element.nome,
+            valor: element.valor,
+            chave: key
+          });
+        };
+        lista.push({
           nome: element.nome,
           valor: element.valor,
           chave: key
-        });
-      };
-      lista.push({
-        nome: element.nome,
-        valor: element.valor,
-        chave: key
-      })
+        }) 
+      }      
     });
     return {
       total: lista,
@@ -62,26 +79,10 @@ export class ArquivoProvider {
     };
   }
 
-  // if (item.valor == "") {
-  //   console.log("Inicio do if Fila");
-  //   console.log("Fila:", item)
-  //   this.lista_fila.push({
-  //     nome: item.nome, 
-  //     valor: "",
-  //   });        
-  //   console.log("Lista fila:", this.lista_fila);        
-  //   console.log("Fim do if Fila");
-  // } else {
-  //   console.log("Comprado");
-  //   this.lista_comprado.push({
-  //     nome: item.nome,
-  //     valor: item.valor
-  //   });
-  // }
-
-
   limpar(){
+    var limite = this.storage.get("x");
     this.storage.clear();
+    this.storage.set("x", limite);
   }
 
 }

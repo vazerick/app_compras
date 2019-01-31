@@ -16,7 +16,7 @@ import { IonicStorageModule } from '@ionic/storage';
     MyApp,
     HomePage,
     ListaPage,
-    ComprasPage
+    ComprasPage,
   ],
   imports: [
     BrowserModule,

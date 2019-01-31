@@ -14,63 +14,80 @@
 
 
 <ion-content padding>
-<div class="status">
-  <ion-grid class="cabecalho">
-    <ion-item text-wrap justify-content: center>      
-        Limite: {{limite | currency:'BRL'}}
-        <button ion-button outline item-end (click)="setLimite()" icon-only danger>
-          <ion-icon name="create"></ion-icon>
-        </button>
-    </ion-item>        
-    <ion-item text-wrap justify-content: center>
-      <ion-col>  
-        Gasto: {{gasto | currency:'BRL'}}
-      </ion-col>
-      <ion-col>
-        Resta: {{resta | currency:'BRL'}}
-      </ion-col>            
-    </ion-item>        
-  </ion-grid>
-</div>
 
-<h1>
-  Teste
-</h1>
-<li *ngFor="let item of items" 
-    (click)="toggleClass(item)" 
-    [ngClass]="{'active': item.active}">{{ item.name }}</li>
+
+
+<!--<div class="status">-->
+<!--<div [ngStyle]="{'background-color': status}">-->
+
+  <ion-card [color]=" limite>gasto ? 'primary' : 'danger'" class="cabecalho">
+    <ion-grid>
+      <ion-item text-wrap justify-content: center>
+          Limite: {{limite | currency:'BRL'}}
+          <button ion-button item-end (click)="setLimite()" icon-only [color]=" limite>gasto ? 'primary' : 'danger'">
+            <ion-icon name="create"></ion-icon>
+          </button>
+      </ion-item>
+      <ion-item text-wrap justify-content: center>
+        <p>
+          Gasto: {{gasto | currency:'BRL'}}
+        </p>
+        <p *ngIf="resta>=0">
+          Resta: {{resta | currency:'BRL'}}
+        </p>
+        <p *ngIf="resta<0">
+          Excedente: {{-resta | currency:'BRL'}}
+        </p>
+      </ion-item>
+    </ion-grid>
+    <div class="barra-ext">
+      <div class="barra-int" [style.width]="barra + '%'">
+      </div>
+    </div>
+  </ion-card>
 
   <h3>Lista de Compras</h3>
 
-  <ion-grid>
-    <ion-row ion-button (click)="comprar(item)" *ngFor="let item of lista_fila">
-      <ion-col>
-        {{item.nome}}          
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-list>
+      <ion-item *ngFor="let item of lista_fila" text-wrap justify-content: center>
+        <div *ngIf="item.vezes>1; else unitario">
+            <ion-badge slot="start" color="secondary">{{item.vezes}}</ion-badge>
+            {{item.nome}}
+        </div>
+        <ng-template #unitario>
+            {{item.nome}}
+        </ng-template>
+        <button ion-button item-end (click)="comprar(item)" icon-only color="secondary">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button item-end (click)="comprar(item)" icon-only color="secondary">
+          <ion-icon name="cart"></ion-icon>
+        </button>
+      </ion-item>
+  </ion-list>
 
   <h3>Itens Comprados</h3>
 
-    <ion-item *ngFor="let item of lista_comprado" >
-      <ion-row justify-content:center align-items-center>      
-        <ion-col col-5 text-wrap size="auto">
-          {{item.nome}}
-        </ion-col>
-        <ion-col col-3>
-          {{item.valor | currency:'BRL'}}
-        </ion-col>
-        <ion-col col-2>
-          <button ion-button outline (click)="editar(item)" icon-only danger>
+    <ion-list>
+      <ion-item text-wrap *ngFor="let item of lista_comprado">
+          <p>
+            {{item.nome}}
+          </p>
+          <p>
+            {{item.valor*item.vezes | currency:'BRL'}}
+          </p>
+          <p *ngIf="item.vezes>1">
+            <sup>
+              ({{item.valor | currency:'BRL'}} x {{item.vezes}})
+            </sup>
+          </p>
+          <button ion-button item-end (click)="editar(item)" icon-only color="secondary">
             <ion-icon name="create"></ion-icon>
           </button>
-        </ion-col>
-        <ion-col col-2>
-          <button ion-button (click)="editar(item)" icon-only danger>
+          <button ion-button item-end (click)="editar(item)" icon-only color="danger">
             <ion-icon name="trash"></ion-icon>
           </button>
-        </ion-col>            
-    </ion-row>
-  </ion-item>    
+    </ion-item>
+  </ion-list>
 
 </ion-content>

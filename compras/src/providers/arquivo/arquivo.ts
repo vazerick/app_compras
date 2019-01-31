@@ -26,7 +26,8 @@ export class ArquivoProvider {
       var limite = {
         nome: "limite",
         valor: valor,
-        chave: "x"
+        chave: "x",
+        vezes: "0"
       };
       this.storage.set("x", limite).then(data => resolve());
     })    
@@ -40,7 +41,9 @@ export class ArquivoProvider {
     return new Promise (resolve => {
       var novo = {
         nome: item.nome,
-        valor: valor
+        valor: valor,
+        chave: item.chave,
+        vezes: item.vezes
       };
       this.storage.set(item.chave, novo).then(data => resolve());
     })
@@ -57,20 +60,23 @@ export class ArquivoProvider {
           if (element.valor == ""){
             lista_fila.push({          
               nome: element.nome,
+              vezes: element.vezes,
               chave: key
             });
           } else {
             lista_comprado.push({
               nome: element.nome,
               valor: element.valor,
+              vezes: element.vezes,
               chave: key
             });
           };
           lista.push({
             nome: element.nome,
             valor: element.valor,
+            vezes: element.vezes,
             chave: key
-          }) 
+          });
         }      
       });
       resolve ({
@@ -87,7 +93,7 @@ export class ArquivoProvider {
       var gasto = 0;
       this.storage.forEach( (element, key) => {
         if (key!="x" && element.valor!=""){
-          gasto += Number(element.valor);
+          gasto += Number(element.valor)*Number(element.vezes);
         }
       }).then(data => resolve(gasto));
     });

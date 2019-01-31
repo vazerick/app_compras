@@ -14,7 +14,7 @@
 
 
 <ion-content padding>
-  
+
     <ion-buttons end>
       <button ion-button icon-only (click)="add()">
         <ion-icon name="add"></ion-icon>
@@ -25,8 +25,17 @@
       
       <ion-list>
           <ion-item *ngFor="let item of lista" text-wrap justify-content: center>
-            {{item.nome}}
-            <button ion-button outline item-end (click)="remove(item)" icon-only danger>
+            <div *ngIf="item.vezes>1; else unitario">
+                <ion-badge slot="start" color="secondary">{{item.vezes}}</ion-badge>
+                {{item.nome}}
+            </div>
+            <ng-template #unitario>
+                {{item.nome}}
+            </ng-template>
+            <button ion-button item-end (click)="remove(item)" icon-only color="secondary">
+              <ion-icon name="create"></ion-icon>
+            </button>
+            <button ion-button item-end (click)="remove(item)" icon-only color="danger">
               <ion-icon name="trash"></ion-icon>
             </button>
           </ion-item>

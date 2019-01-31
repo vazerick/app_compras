@@ -35,10 +35,19 @@ export class ListaPage {
   add() {
     let prompt = this.alertCtrl.create({
       title: 'Novo item',
-      inputs: [{
-        name: 'Nome',
-        placeholder: 'Item'
-      }],
+      message: 'Nome e quantidade',
+      inputs: [
+          {
+            name: 'Nome',
+            placeholder: 'Nome'
+          },
+          {
+            name: 'Vezes',
+            value: '1',
+            type: 'number',
+            min: '1'
+          }
+      ],
       buttons: [
         {
           text: 'Cancelar'
@@ -49,6 +58,7 @@ export class ListaPage {
             this.lista.push({
               nome: data.Nome, 
               valor: "",
+              vezes: data.Vezes
             });
             this.arquivo.salva(this.lista);
             console.log(this.lista)

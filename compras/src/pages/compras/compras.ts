@@ -23,12 +23,7 @@ export class ComprasPage {
   gasto = 0;
   limite = 0;
   resta = 0;
-
-  items = [
-    {name:'one', active:false},
-    {name:'two', active:false},
-    {name:'three', active:false},
-  ];
+  barra = 0;
 
   constructor(
     public navCtrl: NavController, 
@@ -48,7 +43,12 @@ export class ComprasPage {
     });
     this.arquivo.getGasto().then( data => {
       this.gasto = data;
-      this.resta = this.limite - this.gasto
+      this.resta = this.limite - this.gasto;
+      if (this.gasto < this.limite) {
+        this.barra = (this.gasto/this.limite)*100;
+      } else {
+        this.barra = 100;
+      }
     });
     this.arquivo.getLimite().then( data => this.limite = data.valor);
   }
@@ -56,11 +56,21 @@ export class ComprasPage {
   comprar(item) {
     let prompt = this.alertCtrl.create({
       title: 'Comprar '+item.nome,
-      inputs: [{
-        name: 'Valor',
-        type: 'number',
-        placeholder: '0'
-      }],
+      message: 'Valor e quantidade',
+      inputs: [
+          {
+            name: 'Valor',
+            type: 'number',
+            placeholder: 'Valor'
+          },
+          {
+            name: 'Vezes',
+            type: 'number',
+            placeholder: 'Quantidade',
+            value: String(item.vezes),
+            min: 1
+          }
+          ],
       buttons: [
         {
           text: 'Cancelar'
@@ -84,7 +94,7 @@ export class ComprasPage {
       inputs: [{
         name: 'Valor',
         type: 'number',
-        placeholder: '0'
+        placeholder: String(this.limite)
       }],
       buttons: [
         {
@@ -136,10 +146,6 @@ export class ComprasPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ComprasPage');
-  }
-
-  toggleClass(item){
-    item.active = !item.active;
   }
 
 }

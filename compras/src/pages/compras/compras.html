@@ -46,7 +46,9 @@
     </div>
   </ion-card>
 
-  <h3>Lista de Compras</h3>
+  <ion-item-divider>
+    Lista de Compras
+  </ion-item-divider>
 
   <ion-list>
       <ion-item *ngFor="let item of lista_fila" text-wrap justify-content: center>
@@ -57,7 +59,7 @@
         <ng-template #unitario>
             {{item.nome}}
         </ng-template>
-        <button ion-button item-end (click)="comprar(item)" icon-only color="secondary">
+        <button ion-button item-end (click)="editar_fila(item)" icon-only color="secondary">
           <ion-icon name="create"></ion-icon>
         </button>
         <button ion-button item-end (click)="comprar(item)" icon-only color="secondary">
@@ -66,8 +68,10 @@
       </ion-item>
   </ion-list>
 
-  <h3>Itens Comprados</h3>
-
+  <ion-item-divider>
+    Carrinho
+  </ion-item-divider>
+  
     <ion-list>
       <ion-item text-wrap *ngFor="let item of lista_comprado">
           <p>
@@ -81,10 +85,10 @@
               ({{item.valor | currency:'BRL'}} x {{item.vezes}})
             </sup>
           </p>
-          <button ion-button item-end (click)="editar(item)" icon-only color="secondary">
+          <button ion-button item-end (click)="editar_comprado(item)" icon-only color="secondary">
             <ion-icon name="create"></ion-icon>
           </button>
-          <button ion-button item-end (click)="editar(item)" icon-only color="danger">
+          <button ion-button item-end (click)="remover(item)" icon-only color="danger">
             <ion-icon name="trash"></ion-icon>
           </button>
     </ion-item>

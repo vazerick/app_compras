@@ -10,6 +10,7 @@ import { ListaPage } from '../pages/lista/lista';
 import { ComprasPage } from '../pages/compras/compras';
 import { ArquivoProvider } from '../providers/arquivo/arquivo';
 import { IonicStorageModule } from '@ionic/storage';
+import { ComparadorPage } from '../pages/comparador/comparador';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     ListaPage,
     ComprasPage,
+    ComparadorPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { IonicStorageModule } from '@ionic/storage';
     MyApp,
     HomePage,
     ListaPage,
-    ComprasPage
+    ComprasPage,
+    ComparadorPage
   ],
   providers: [
     StatusBar,

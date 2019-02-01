@@ -21,6 +21,18 @@ export class ArquivoProvider {
     });    
   }
 
+  editar(item, nome, vezes){
+    return new Promise (resolve => {      
+      var novo = {
+        nome: nome,
+        valor: item.valor,
+        chave: item.chave,
+        vezes: vezes
+      };
+      this.storage.set(item.chave, novo).then(data => resolve());
+    })
+  }
+
   addLimite (valor) {
     return new Promise (resolve => {
       var limite = {

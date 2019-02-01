@@ -112,14 +112,60 @@ export class ComprasPage {
     prompt.present()
   }
 
-  editar(item) {
+  editar_fila(item) {
     let prompt = this.alertCtrl.create({
       title: 'Editar '+item.nome,
-      inputs: [{
-        name: 'Valor',
-        type: 'number',
-        placeholder: item.valor,
-      }],
+      message: 'Nome e quantidade',
+      inputs: [
+        {
+          name: 'Nome',
+          value: item.nome,
+        },        
+        {
+          name: 'Vezes',
+          type: 'number',
+          value: item.vezes,
+          min: 1,
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar'
+        },        
+        {
+          text: 'Editar',
+          handler: data => {
+            this.arquivo.editar(item, data.Nome, data.Vezes).then(data => {
+              this.atualiza();
+            });                                    
+          }
+        }
+      ]
+    });    
+    prompt.present();        
+  }
+
+  editar_comprado(item) {
+    let prompt = this.alertCtrl.create({
+      title: 'Editar '+item.nome,
+      message: 'Nome, preço e quantidade',
+      inputs: [
+        {
+          name: 'Nome',
+          value: item.nome,
+        },        
+        {
+          name: 'Valor',
+          type: 'number',
+          value: item.valor,
+        },
+        {
+          name: 'Vezes',
+          type: 'number',
+          value: item.vezes,
+          min: 1,
+        },
+      ],
       buttons: [
         {
           text: 'Cancelar'
@@ -138,9 +184,26 @@ export class ComprasPage {
         }
       ]
     });    
-    prompt.present().then( data => {
-      console.log("Dados:", data);
-    });        
+    prompt.present();        
+  }
+
+  remover(item) {
+    let prompt = this.alertCtrl.create({
+      title: 'Remover '+item.nome,
+      message: 'Retornar '+item.nome+" da lista de compras?",      
+      buttons: [
+        {
+          text: 'Cancelar'
+        },
+        {
+          text: 'Remover',
+          handler: data => {
+            this.arquivo.addValor(item, "").then( data => this.atualiza());            
+          }
+        }
+      ]
+    });    
+    prompt.present();        
   }
 
 

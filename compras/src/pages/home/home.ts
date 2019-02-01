@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { executeViewHooks } from '@angular/core/src/render3/instructions';
 import { ListaPage } from '../lista/lista'
 import { ComprasPage } from '../compras/compras';
+import { ComparadorPage } from '../comparador/comparador';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +21,10 @@ export class HomePage {
 
   pag_compras(){
     this.navCtrl.push(ComprasPage);
+  }
+
+  pag_comparador(){
+    this.navCtrl.push(ComparadorPage);
   }
 
 }

@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ComparadorPage {
   
-  itens = [];
+  itens = []
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     var cont = [1, 2, 3]
@@ -33,13 +33,13 @@ export class ComparadorPage {
     console.log(this.itens);
   }
 
-  atualiza() {
-    var preco = this.itens.preco;
-    var quantia = this.itens.quantia;
-    var unidades = this.itens.unidades;
-    var valor = (preco/(quantia*unidades));
-    this.itens.valor = valor;
-  }
+  // atualiza() {
+  //   var preco = this.itens.preco;
+  //   var quantia = this.itens.quantia;
+  //   var unidades = this.itens.unidades;
+  //   var valor = (preco/(quantia*unidades));
+  //   this.itens.valor = valor;
+  // }
 
   menor() {
     let valor = [];

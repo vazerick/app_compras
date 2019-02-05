@@ -85,7 +85,7 @@ export class ListaPage {
     prompt.present();
   }
 
-  editar(item) {
+  editar(item) {    
     if (item.valor == ""){
       let prompt = this.alertCtrl.create({
         title: 'Editar ' + item.nome,
@@ -116,7 +116,8 @@ export class ListaPage {
             }
           }
         ]
-      }); 
+      });
+      prompt.present(); 
     } else {
       let prompt = this.alertCtrl.create({
         title: 'Editar ' + item.nome,
@@ -142,11 +143,11 @@ export class ListaPage {
           }
         ]
       }); 
-    };       
-    prompt.present();
+      prompt.present();
+    };           
   }
 
-  remove(item: string) {
+  remove(item) {
     let prompt = this.alertCtrl.create({
       title: 'Remover ' + item.nome,
       message: 'Deseja remover ' + item.nome + '?',

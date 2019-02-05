@@ -5,8 +5,8 @@ echo ionic cordova compile android --device
 echo ionic cordova build android --device
 echo ionic cordova build android --release
 pause
-SET  chave=chave20190129
-SET  app=Mercado20190129
+SET  chave=ChaveMercado
+SET  app=VazMercado
 SET unsigned=app-release-unsigned.apk
 echo Chave: %chave%
 echo App: %app%

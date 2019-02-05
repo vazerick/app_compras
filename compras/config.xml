@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="vaz_mercado" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.starter" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Assistente de Mercado</name>
     <description>Aplicativo de Assistente de Mercado, para ajudar a economizar.</description>
     <author email="erickvaz.rs@gmail.com">vazerick</author>

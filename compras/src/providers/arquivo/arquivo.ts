@@ -90,7 +90,11 @@ export class ArquivoProvider {
 
   getLista() {
     // return "get Lista"
-    return new Promise (resolve => {
+    return new Promise<{
+      total: Array<any>,
+      comprado: Array<any>
+      fila: Array<any>
+    }> (resolve => {
       var lista = [];
       var lista_comprado = [];
       var lista_fila = [];
@@ -128,7 +132,7 @@ export class ArquivoProvider {
   }
 
   getGasto() {
-    return new Promise (resolve => {
+    return new Promise<number>(resolve => {
       var gasto = 0;
       this.storage.forEach( (element, key) => {
         if (key!="x" && element.valor!=""){

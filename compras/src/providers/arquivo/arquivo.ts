@@ -10,9 +10,32 @@ export class ArquivoProvider {
     this.addLimite(0);
   }
 
-  add(item: Object) {
-    console.log(item);
+  add(item) {
+    return new Promise (resolve => {
+      this.storage.length().then( num_arquivo => {
+        let chave = (num_arquivo-1).toString();
+        while (chave.length < 3) chave = "0" + chave;
+        this.storage.set(chave,
+          {
+            nome: item.nome,
+            valor: item.valor,
+            vezes: item.vezes,            
+          });
+        resolve (chave);
+      });
+    })
+    
   }
+
+  // this.arquivo.storage.length().then( num_arquivo => {
+  //   let chave = (num_arquivo-1).toString();
+  //   while (chave.length < 3) chave = "0" + chave ;
+  //   this.arquivo.storage.set(chave,{
+  //     nome: data.Nome,
+  //     vezes: data.Vezes,
+  //     valor: data.Valor
+  //   }).then( data => this.atualiza());
+  // });                         
 
   salva(lista: Array<any>) {    
     this.limpar();

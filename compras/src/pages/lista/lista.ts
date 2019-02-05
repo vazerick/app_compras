@@ -60,8 +60,12 @@ export class ListaPage {
                 nome: data.Nome, 
                 valor: "",
                 vezes: data.Vezes
-              });
-              this.arquivo.salva(this.lista);                         
+              });              
+              this.arquivo.add({
+                nome: data.Nome,
+                valor: "",
+                vezes: data.Vezes
+              })
             } else {
               let prompt2 = this.alertCtrl.create({
                 title: 'Erro',

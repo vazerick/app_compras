@@ -80,15 +80,11 @@ export class ComprasPage {
             text: 'Adicionar',
             handler: data => {
               if (data.Nome.length>0){
-                this.arquivo.storage.length().then( num_arquivo => {
-                  let chave = (num_arquivo-1).toString();
-                  while (chave.length < 3) chave = "0" + chave;
-                  this.arquivo.storage.set(chave,{
-                    nome: data.Nome,
-                    vezes: data.Vezes,
-                    valor: ""
-                  }).then( data => this.atualiza());
-                });                         
+                this.arquivo.add({
+                  nome: data.Nome,
+                  vezes: data.Vezes,
+                  valor: "",
+                }).then ( data => this.atualiza());
               } else {
                 let prompt2 = this.alertCtrl.create({
                   title: 'Erro',
@@ -142,15 +138,11 @@ export class ComprasPage {
             text: 'Adicionar',
             handler: data => {
               if ((data.Valor>0)&&(data.Nome.length>0)){
-                this.arquivo.storage.length().then( num_arquivo => {
-                  let chave = (num_arquivo-1).toString();
-                  while (chave.length < 3) chave = "0" + chave;
-                  this.arquivo.storage.set(chave,{
-                    nome: data.Nome,
-                    vezes: data.Vezes,
-                    valor: data.Valor
-                  }).then( data => this.atualiza());
-                });                         
+                this.arquivo.add({
+                  nome: data.Nome,
+                  vezes: data.Vezes,
+                  valor: data.Valor,
+                }).then ( data => this.atualiza());
               } else {
                 let prompt2 = this.alertCtrl.create({
                   title: 'Erro',

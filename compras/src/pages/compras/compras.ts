@@ -52,6 +52,124 @@ export class ComprasPage {
     });
     this.arquivo.getLimite().then( data => this.limite = data.valor);
   }
+
+  add_lista() {
+    let lista: Array<any>
+    this.arquivo.getLista().then( data => {
+      lista = data.total;
+      let prompt = this.alertCtrl.create({
+        title: 'Novo item na lista',
+        message: 'Nome e quantidade.',
+        inputs: [
+            {
+              name: 'Nome',
+              placeholder: 'Nome'
+            },
+            {
+              name: 'Vezes',
+              value: '1',
+              type: 'number',
+              min: '1'
+            }
+        ],
+        buttons: [
+          {
+            text: 'Cancelar'
+          },
+          {
+            text: 'Adicionar',
+            handler: data => {
+              if (data.Nome.length>0){
+                this.arquivo.storage.length().then( num_arquivo => {
+                  let chave = (num_arquivo-1).toString();
+                  while (chave.length < 3) chave = "0" + chave;
+                  this.arquivo.storage.set(chave,{
+                    nome: data.Nome,
+                    vezes: data.Vezes,
+                    valor: ""
+                  }).then( data => this.atualiza());
+                });                         
+              } else {
+                let prompt2 = this.alertCtrl.create({
+                  title: 'Erro',
+                  message: 'Informação incompleta.',
+                  buttons: [
+                    {
+                      text: 'Ok'
+                    }
+                  ]
+                })
+                prompt2.present();
+              }                                     
+            }
+          }
+        ]
+      });    
+      prompt.present();
+    });    
+  }  
+
+  add_carrinho() {
+    let lista: Array<any>
+    this.arquivo.getLista().then( data => {
+      lista = data.total;
+      let prompt = this.alertCtrl.create({
+        title: 'Novo item no carrinho',
+        message: 'Nome, valor e quantidade.',
+        inputs: [
+            {
+              name: 'Nome',
+              placeholder: 'Nome'
+            },
+            {
+              name: 'Valor',
+              placeholder: 'Valor',
+              type: 'number',
+              min: '1'
+            },
+            {
+              name: 'Vezes',
+              value: '1',
+              type: 'number',
+              min: '1'
+            }
+        ],
+        buttons: [
+          {
+            text: 'Cancelar'
+          },
+          {
+            text: 'Adicionar',
+            handler: data => {
+              if ((data.Valor>0)&&(data.Nome.length>0)){
+                this.arquivo.storage.length().then( num_arquivo => {
+                  let chave = (num_arquivo-1).toString();
+                  while (chave.length < 3) chave = "0" + chave;
+                  this.arquivo.storage.set(chave,{
+                    nome: data.Nome,
+                    vezes: data.Vezes,
+                    valor: data.Valor
+                  }).then( data => this.atualiza());
+                });                         
+              } else {
+                let prompt2 = this.alertCtrl.create({
+                  title: 'Erro',
+                  message: 'Informação incompleta.',
+                  buttons: [
+                    {
+                      text: 'Ok'
+                    }
+                  ]
+                })
+                prompt2.present();
+              }              
+            }
+          }
+        ]
+      });    
+      prompt.present();
+    });    
+  }  
   
   comprar(item) {
     let prompt = this.alertCtrl.create({
@@ -169,13 +287,7 @@ export class ComprasPage {
       buttons: [
         {
           text: 'Cancelar'
-        },
-        {
-          text: 'Remover',
-          handler: data => {
-            this.arquivo.addValor(item, "").then( data => this.atualiza());            
-          }
-        },
+        },        
         {
           text: 'Editar',
           handler: data => {                    

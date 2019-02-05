@@ -10,6 +10,10 @@ export class ArquivoProvider {
     this.addLimite(0);
   }
 
+  add(item: Object) {
+    console.log(item);
+  }
+
   salva(lista: Array<any>) {    
     this.limpar();
     lista.forEach( (value: string, index: number) => {

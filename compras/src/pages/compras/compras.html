@@ -18,7 +18,7 @@
 
 
 <!--<div class="status">-->
-<!--<div [ngStyle]="{'background-color': status}">-->
+<!--<div [ngStyle]="{'background-color': status}">-->  
 
   <ion-card [color]=" limite>gasto ? 'primary' : 'danger'" class="cabecalho">
     <ion-grid>
@@ -45,9 +45,16 @@
       </div>
     </div>
   </ion-card>
+  
+  
 
   <ion-item-divider>
-    Lista de Compras
+      Lista de Compras
+      <ion-buttons item-end end>
+          <button ion-button icon-only (click)="add_lista()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+      </ion-buttons>
   </ion-item-divider>
 
   <ion-list>
@@ -70,6 +77,11 @@
 
   <ion-item-divider>
     Carrinho
+    <ion-buttons item-end end>
+        <button ion-button icon-only (click)="add_carrinho()">
+          <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-buttons>    
   </ion-item-divider>
   
     <ion-list>

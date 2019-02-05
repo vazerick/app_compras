@@ -55,13 +55,25 @@ export class ListaPage {
         {
           text: 'Adicionar',
           handler: data => {
-            this.lista.push({
-              nome: data.Nome, 
-              valor: "",
-              vezes: data.Vezes
-            });
-            this.arquivo.salva(this.lista);
-            console.log(this.lista)
+            if (data.Nome.length>0){
+              this.lista.push({
+                nome: data.Nome, 
+                valor: "",
+                vezes: data.Vezes
+              });
+              this.arquivo.salva(this.lista);                         
+            } else {
+              let prompt2 = this.alertCtrl.create({
+                title: 'Erro',
+                message: 'Informação incompleta.',
+                buttons: [
+                  {
+                    text: 'Ok'
+                  }
+                ]
+              })
+              prompt2.present();
+            }            
           }
         }
       ]

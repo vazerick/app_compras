@@ -1,0 +1,47 @@
+<!--
+  Generated template for the ComparadorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Comparar Preços</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-grid *ngFor="let item of itens" text-wrap justify-content: center>     
+      <div [ngClass]="item.preco/(item.quantia*item.unidades)==menor() ? 'melhor' : 'normal'" color="primary">    
+      {{item.num}}º
+      <ion-row color="primary">
+      <ion-col>
+        <ion-item>
+          <ion-label color="primary" floating>Preço</ion-label>
+          <ion-input  type="number" [(ngModel)]="item.preco"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label color="primary" floating>Quantia</ion-label>
+          <ion-input  type="number" [(ngModel)]="item.quantia"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label color="primary" floating>Unidades</ion-label>
+          <ion-input  type="number" [(ngModel)]="item.unidades"></ion-input>
+         </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <p *ngIf="item.preco > 0 && item.quantia > 0 && item.unidades > 0">          
+        {{item.preco/(item.quantia*item.unidades)}}
+      </p>
+    </ion-row>  
+    </div>
+  </ion-grid>
+</ion-content>

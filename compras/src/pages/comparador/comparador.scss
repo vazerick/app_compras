@@ -1,0 +1,9 @@
+page-comparador {
+    .col {}
+    .melhor {
+        background: color($colors, secondary);
+        p {
+            color: white;
+        }
+    }
+}

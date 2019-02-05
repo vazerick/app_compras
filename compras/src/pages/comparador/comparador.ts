@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ComparadorPage page.
@@ -17,8 +17,12 @@ export class ComparadorPage {
   
   itens = []
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    var cont = [1, 2, 3]
+  constructor(
+      public navCtrl: NavController, 
+      public navParams: NavParams,
+      public alertCtrl: AlertController,
+    ) {
+    let cont = [1, 2]
     cont.forEach(element => {      
       let item = {
         preco: 0,
@@ -29,8 +33,50 @@ export class ComparadorPage {
       }
       this.itens.push(item);
     });
-    console.log(cont);
-    console.log(this.itens);
+  }
+
+  add(){
+    this.itens.push({
+      preco: 0,
+      quantia: 0,
+      unidades: 1,
+      valor: 0,
+      num: this.itens.length+1
+    })
+  }
+
+  limpa(){
+    let prompt = this.alertCtrl.create({
+      title: 'LIMPAR',
+      message: 'Deseja limpar toda a lista?',
+      buttons: [
+        {
+          text: 'Não',
+          handler: () => {
+            console.log('Cancel clicked');
+            }
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.itens = [];
+            let cont = [1, 2];
+            cont.forEach(element => {      
+              let item = {
+                preco: 0,
+                quantia: 0,
+                unidades: 1,
+                valor: 0,
+                num: element
+              }
+              this.itens.push(item);
+            });
+        
+          }
+      }                
+      ]
+    })
+    prompt.present();
   }
 
   // atualiza() {

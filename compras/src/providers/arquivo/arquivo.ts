@@ -49,13 +49,17 @@ export class ArquivoProvider {
   }
 
   editar(item, nome, vezes){
-    return new Promise (resolve => {      
+    return new Promise (resolve => {           
+      if (item.valor == undefined) {
+        item.valor="";
+      }
       var novo = {
         nome: nome,
         valor: item.valor,
         chave: item.chave,
         vezes: vezes
       };
+      console.log(novo);
       this.storage.set(item.chave, novo).then(data => resolve());
     })
   }

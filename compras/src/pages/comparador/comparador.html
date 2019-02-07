@@ -18,6 +18,10 @@
       <div [ngClass]="item.preco/(item.quantia*item.unidades)==menor() ? 'melhor' : 'normal'" color="primary">    
       {{item.num}}º
       <ion-row color="primary">
+        <ion-item>
+          <ion-label color="primary" floating>Item</ion-label>
+          <ion-input  type="text"></ion-input>
+        </ion-item>
       <ion-col>
         <ion-item>
           <ion-label color="primary" floating>Preço</ion-label>

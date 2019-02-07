@@ -15,11 +15,10 @@
 
 <ion-content padding>
     <ion-grid *ngFor="let item of itens" text-wrap justify-content: center>     
-      <div [ngClass]="item.preco/(item.quantia*item.unidades)==menor() ? 'melhor' : 'normal'" color="primary">    
-      {{item.num}}º
-      <ion-row color="primary">
+      <div [ngClass]="item.preco/(item.quantia*item.unidades)==menor() ? 'melhor' : 'normal'" color="primary">          
+      <ion-row color="primary">          
         <ion-item>
-          <ion-label color="primary" floating>Item</ion-label>
+          <ion-label color="primary" floating>{{item.num}}º item</ion-label>
           <ion-input  type="text"></ion-input>
         </ion-item>
       <ion-col>

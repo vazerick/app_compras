@@ -1,8 +1,13 @@
-page-comparador {
-    .col {}
+page-comparador {    
+    .item {
+        background: transparent;
+    }
     .melhor {
         background: color($colors, secondary);
         p {
+            color: white;
+        }
+        .label {
             color: white;
         }
     }

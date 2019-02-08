@@ -66,6 +66,12 @@
         <ng-template #unitario>
             {{item.nome}}
         </ng-template>
+        <button ion-button (click)="numero(item, -1)" item-end icon-only clear color="secondary">
+          <ion-icon name="remove-circle"></ion-icon>
+        </button>
+        <button ion-button (click)="numero(item, 1)" item-end icon-only clear color="secondary">
+          <ion-icon name="add-circle"></ion-icon>
+        </button>
         <button ion-button item-end (click)="editar_fila(item)" icon-only color="secondary">
           <ion-icon name="create"></ion-icon>
         </button>
@@ -97,6 +103,12 @@
               ({{item.valor | currency:'BRL'}} x {{item.vezes}})
             </sup>
           </p>
+          <button ion-button (click)="numero(item, -1)" item-end icon-only clear color="secondary">
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>
+          <button ion-button (click)="numero(item, 1)" item-end icon-only clear color="secondary">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
           <button ion-button item-end (click)="editar_comprado(item)" icon-only color="secondary">
             <ion-icon name="create"></ion-icon>
           </button>

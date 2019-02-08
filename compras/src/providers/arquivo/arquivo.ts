@@ -61,6 +61,7 @@ export class ArquivoProvider {
       };
       console.log(novo);
       this.storage.set(item.chave, novo).then(data => resolve());
+      resolve(novo);
     })
   }
 

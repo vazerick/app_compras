@@ -222,6 +222,13 @@ export class ComprasPage {
     prompt.present()
   }
 
+  numero(item, soma) {
+    let vezes = Number(item.vezes)+soma
+    if (vezes > 0) {
+      this.arquivo.editar(item, item.nome, vezes).then( data => this.atualiza() );
+    }    
+  }
+
   editar_fila(item) {
     let prompt = this.alertCtrl.create({
       title: 'Editar '+item.nome,
@@ -283,7 +290,11 @@ export class ComprasPage {
         {
           text: 'Editar',
           handler: data => {                    
-            this.arquivo.addValor(item, data.Valor).then( data => this.atualiza());            
+            this.arquivo.editar(item, data.Nome, data.Vezes).then( novo => {
+              this.arquivo.addValor(novo, data.Valor).then(data3 => {
+                this.atualiza();
+              });              
+            }); 
           }
         }
       ]

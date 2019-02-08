@@ -32,6 +32,16 @@ export class ListaPage {
     console.log('ionViewDidLoad ListaPage');
   }
 
+  numero(item, soma) {
+    console.log("mais")
+    let vezes = Number(item.vezes)+soma
+    if (vezes > 0) {
+      this.arquivo.editar(item, item.nome, vezes).then( data =>
+        this.arquivo.getLista().then( data => this.lista = data.total)
+      );
+    }    
+  }
+
   add() {
     let prompt = this.alertCtrl.create({
       title: 'Novo item',

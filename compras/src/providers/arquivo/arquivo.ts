@@ -89,7 +89,7 @@ export class ArquivoProvider {
         chave: item.chave,
         vezes: item.vezes
       };
-      this.storage.set(item.chave, novo).then(data => resolve());
+      this.storage.set(item.chave, novo).then(data => resolve(novo));
     })
   }
 

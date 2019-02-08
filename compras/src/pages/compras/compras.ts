@@ -253,7 +253,7 @@ export class ComprasPage {
           text: 'Editar',
           handler: data => {
             this.arquivo.editar(item, data.Nome, data.Vezes).then(data => {
-              this.atualiza();
+              this.lista_fila[this.lista_fila.indexOf(item)] = data;
             });                                    
           }
         }
@@ -291,8 +291,8 @@ export class ComprasPage {
           text: 'Editar',
           handler: data => {                    
             this.arquivo.editar(item, data.Nome, data.Vezes).then( novo => {
-              this.arquivo.addValor(novo, data.Valor).then(data3 => {
-                this.atualiza();
+              this.arquivo.addValor(novo, data.Valor).then(data => {
+                this.lista_comprado[this.lista_comprado.indexOf(item)] = data;
               });              
             }); 
           }

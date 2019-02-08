@@ -33,12 +33,10 @@ export class ListaPage {
   }
 
   numero(item, soma) {
-    console.log("mais")
     let vezes = Number(item.vezes)+soma
     if (vezes > 0) {
       this.arquivo.editar(item, item.nome, vezes).then( data =>
-        this.arquivo.getLista().then( data => this.lista = data.total)
-      );
+        this.lista[this.lista.indexOf(item)].vezes = vezes);
     }    
   }
 
@@ -121,7 +119,7 @@ export class ListaPage {
             text: 'Editar',
             handler: data => {
               this.arquivo.editar(item, data.Nome, data.Vezes).then(data => {
-                this.arquivo.getLista().then( data => this.lista = data.total);
+                this.lista[this.lista.indexOf(item)] = data;
               });                                    
             }
           }
@@ -203,5 +201,7 @@ export class ListaPage {
     prompt.present();
 
   }
+
+  
 
 }

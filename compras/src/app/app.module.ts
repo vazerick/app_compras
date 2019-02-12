@@ -14,6 +14,7 @@ import {ComparadorPage} from '../pages/comparador/comparador';
 import {pipePreco} from '../pipes/preco';
 import { AdicionarPage } from '../modal/adicionar/adicionar';
 import { EditarPage } from '../modal/editar/editar';
+import { ComprarPage } from '../modal/comprar/comprar';
 
 @NgModule({
   declarations: [    
@@ -24,7 +25,8 @@ import { EditarPage } from '../modal/editar/editar';
     ComparadorPage,
     pipePreco,
     AdicionarPage,
-    EditarPage
+    EditarPage,
+    ComprarPage,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { EditarPage } from '../modal/editar/editar';
     ComprasPage,
     ComparadorPage,
     AdicionarPage,
-    EditarPage
+    EditarPage,
+    ComprarPage,
   ],
   providers: [
     StatusBar,

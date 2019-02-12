@@ -7,16 +7,40 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>adicionar</ion-title>
+    <ion-title>Adicionar item</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+
+
 <ion-content padding>
-    {{teste}}
-    <ion-buttons end class='add'>
-        <button ion-button (click)="modal()">
-          TESTE
-        </button>
-    </ion-buttons>
+  <ion-item>
+    <ion-label color="primary" floating>Nome</ion-label>
+    <ion-input type="text"></ion-input>    
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Valor</ion-label>
+    <ion-input type="number"></ion-input>    
+  </ion-item>
+  <ion-item>
+    <ion-label color="primary" floating>Quantidade</ion-label>
+    <ion-input type="number"></ion-input>    
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col ion-button icon-only (click)="modal()">
+          +5
+      </ion-col>
+      <ion-col ion-button icon-only (click)="modal()">
+          +1
+      </ion-col>
+      <ion-col ion-button icon-only (click)="modal()">
+          -1
+      </ion-col>
+      <ion-col ion-button icon-only (click)="modal()">
+          -5
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

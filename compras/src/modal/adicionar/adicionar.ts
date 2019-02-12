@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class AdicionarPage {
   
-  teste: string;
+  valor: boolean;
 
   constructor(
     public navCtrl: NavController, 
@@ -23,8 +23,7 @@ export class AdicionarPage {
     public viewCtrl: ViewController,
     params: NavParams
     ) {
-      
-      this.teste = params.get('teste');
+      this.valor = params.get('valor');
       
   }
 

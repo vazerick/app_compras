@@ -35,7 +35,7 @@ export class ListaPage {
 modal() {
   let profileModal = this.modalCtrl.create(
     AdicionarPage,
-    {teste: "teste"},
+    {valor: false},
     {showBackdrop: true}
   );
   profileModal.present();

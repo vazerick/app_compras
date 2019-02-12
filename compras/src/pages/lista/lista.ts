@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, reorderArray } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, reorderArray, ModalController  } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ArquivoProvider } from '../../providers/arquivo/arquivo'
+import { AdicionarPage } from '../../modal/adicionar/adicionar'
 
 /**
  * Generated class for the ListaPage page.
@@ -23,10 +24,26 @@ export class ListaPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public arquivo: ArquivoProvider
+    public arquivo: ArquivoProvider,
+    public modalCtrl: ModalController
     ) {
+      console.log("Arquivo:",this.arquivo.teste);
       this.arquivo.getLista().then( data => this.lista = data.total);
   }
+
+  
+modal() {
+  let profileModal = this.modalCtrl.create(
+    AdicionarPage,
+    {teste: "teste"},
+    {showBackdrop: true}
+  );
+  profileModal.present();
+
+  profileModal.onDidDismiss(data => {  
+    console.log(data);
+  });
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaPage');

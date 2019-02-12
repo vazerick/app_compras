@@ -15,6 +15,25 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.modal-wrapper{
+    position: absolute;
+    width: 75%;
+    height: 50%;
+    top: 0;
+    bottom: 25%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    background: rgba(0,0,0,0.5);
+    
+    }
+    @media (min-width: 300px) and (min-height: 500px) {
+    ion-modal ion-backdrop {
+    visibility: visible; }
+    }
+
+
 .item-divider{
     color: black;
     font-weight: bold;

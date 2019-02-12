@@ -12,6 +12,8 @@ import { ArquivoProvider } from '../providers/arquivo/arquivo';
 import { IonicStorageModule } from '@ionic/storage';
 import {ComparadorPage} from '../pages/comparador/comparador';
 import {pipePreco} from '../pipes/preco';
+import { AdicionarPage } from '../modal/adicionar/adicionar';
+import { EditarPage } from '../modal/editar/editar';
 
 @NgModule({
   declarations: [    
@@ -20,7 +22,9 @@ import {pipePreco} from '../pipes/preco';
     ListaPage,
     ComprasPage,
     ComparadorPage,
-    pipePreco
+    pipePreco,
+    AdicionarPage,
+    EditarPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import {pipePreco} from '../pipes/preco';
     HomePage,
     ListaPage,
     ComprasPage,
-    ComparadorPage
+    ComparadorPage,
+    AdicionarPage,
+    EditarPage
   ],
   providers: [
     StatusBar,

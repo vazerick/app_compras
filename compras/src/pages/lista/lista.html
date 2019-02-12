@@ -16,6 +16,12 @@
 <ion-content padding>
 
     <ion-buttons end class='add'>
+        <button ion-button (click)="modal()">
+          TESTE
+        </button>
+    </ion-buttons>
+
+    <ion-buttons end class='add'>
       <button ion-button icon-only (click)="add()">
         <ion-icon name="add"></ion-icon>
       </button>
@@ -24,7 +30,7 @@
     <ion-grid>
       
       <ion-list reorder="true" (ionItemReorder)="reorder($event)">
-          <ion-item *ngFor="let item of lista" text-wrap justify-content: center (click)="seleciona(item)" >
+          <ion-item *ngFor="let item of arquivo.lista" text-wrap justify-content: center (click)="seleciona(item)" >
             <div *ngIf="item.vezes>1; else unitario">
                 <ion-badge slot="start" color="secondary">{{item.vezes}}</ion-badge>
                 {{item.nome}}

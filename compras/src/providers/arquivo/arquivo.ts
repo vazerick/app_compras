@@ -2,14 +2,92 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Item } from 'ionic-angular';
+import { findLast } from '@angular/compiler/src/directive_resolver';
 
 @Injectable()
 export class ArquivoProvider {
 
-  constructor(public storage: Storage) { 
-    this.addLimite(0);
+  teste:string;
+  lista:Array<any>;
+  limite:number;
+
+  constructor(public storage: Storage) {     
+    // this.addLimite(0);
+    this.teste = "Teste de Provider";
+    this.lista = [];
+    this.limite = 0;
+    this.atualiza();
   }
 
+  atualiza() {
+    return new Promise<{
+      limite: number,
+      lista: Array<any>
+    }> (resolve => {
+      let lista: Array<any> = [];
+      let limite: number = 0;
+      this.storage.forEach( (element, key) => {
+        if (key!='x') {
+          lista.push({
+            nome: element.nome,
+            vezes: element.vezes,
+            valor: element.valor,
+            chave: key
+          })
+        } else {
+          limite = element.valor;
+        }
+      }).then(data => {
+        this.lista = lista;
+        this.limite = limite;
+        resolve({
+          limite: limite,
+          lista: lista
+        });
+      });
+    })
+  }
+
+  // return new Promise<{
+  //     total: Array<any>,
+  //     comprado: Array<any>
+  //     fila: Array<any>
+  //   }> (resolve => {
+  //     var lista = [];
+  //     var lista_comprado = [];
+  //     var lista_fila = [];
+  //     this.storage.forEach( (element, key) => {
+  //       if (key!="x") {
+  //         if (element.valor == ""){
+  //           lista_fila.push({          
+  //             nome: element.nome,
+  //             vezes: element.vezes,
+  //             chave: key
+  //           });
+  //         } else {
+  //           lista_comprado.push({
+  //             nome: element.nome,
+  //             valor: element.valor,
+  //             vezes: element.vezes,
+  //             chave: key
+  //           });
+  //         };
+  //         lista.push({
+  //           nome: element.nome,
+  //           valor: element.valor,
+  //           vezes: element.vezes,
+  //           chave: key
+  //         });
+  //       }      
+  //     });
+  //     resolve ({
+  //       total: lista,
+  //       comprado: lista_comprado,
+  //       fila: lista_fila
+  //     });
+  //   });
+    
+  // }
   add(item) {
     return new Promise (resolve => {
       this.storage.length().then( num_arquivo => {
@@ -26,16 +104,7 @@ export class ArquivoProvider {
     })
     
   }
-
-  // this.arquivo.storage.length().then( num_arquivo => {
-  //   let chave = (num_arquivo-1).toString();
-  //   while (chave.length < 3) chave = "0" + chave ;
-  //   this.arquivo.storage.set(chave,{
-  //     nome: data.Nome,
-  //     vezes: data.Vezes,
-  //     valor: data.Valor
-  //   }).then( data => this.atualiza());
-  // });                         
+                   
 
   salva(lista: Array<any>) {    
     this.limpar();

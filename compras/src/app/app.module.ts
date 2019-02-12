@@ -10,16 +10,17 @@ import { ListaPage } from '../pages/lista/lista';
 import { ComprasPage } from '../pages/compras/compras';
 import { ArquivoProvider } from '../providers/arquivo/arquivo';
 import { IonicStorageModule } from '@ionic/storage';
-import {ComparadorPage, pipePreco} from '../pages/comparador/comparador';
+import {ComparadorPage} from '../pages/comparador/comparador';
+import {pipePreco} from '../pipes/preco';
 
 @NgModule({
-  declarations: [
-      pipePreco,
+  declarations: [    
     MyApp,
     HomePage,
     ListaPage,
     ComprasPage,
-    ComparadorPage
+    ComparadorPage,
+    pipePreco
   ],
   imports: [
     BrowserModule,

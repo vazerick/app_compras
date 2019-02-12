@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Item } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, reorderArray } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ArquivoProvider } from '../../providers/arquivo/arquivo'
 
@@ -200,6 +200,20 @@ export class ListaPage {
     })
     prompt.present();
 
+  }
+
+  reorder(ev) {
+    reorderArray(this.lista,ev);
+    this.arquivo.salva(this.lista);
+  }
+
+  seleciona(item) {
+    item.select = ! item.select;
+    this.lista.forEach(element => {
+      if (element != item) {
+        element.select = false;
+      }
+    })
   }
 
   

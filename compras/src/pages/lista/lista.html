@@ -23,8 +23,8 @@
 
     <ion-grid>
       
-      <ion-list>
-          <ion-item *ngFor="let item of lista" text-wrap justify-content: center>
+      <ion-list reorder="true" (ionItemReorder)="reorder($event)">
+          <ion-item *ngFor="let item of lista" text-wrap justify-content: center (click)="seleciona(item)" >
             <div *ngIf="item.vezes>1; else unitario">
                 <ion-badge slot="start" color="secondary">{{item.vezes}}</ion-badge>
                 {{item.nome}}
@@ -32,18 +32,20 @@
             <ng-template #unitario>
                 {{item.nome}}
             </ng-template>
-            <button ion-button (click)="numero(item, -1)" item-end icon-only clear color="secondary">
-              <ion-icon name="remove-circle"></ion-icon>
-            </button>
-            <button ion-button (click)="numero(item, 1)" item-end icon-only clear color="secondary">
-              <ion-icon name="add-circle"></ion-icon>
-            </button>
-            <button ion-button item-end (click)="editar(item)" icon-only color="secondary">
-              <ion-icon name="create"></ion-icon>
-            </button>
-            <button ion-button item-end (click)="remove(item)" icon-only color="danger">
-              <ion-icon name="trash"></ion-icon>
-            </button>
+              <ion-row *ngIf="item.select">
+                <ion-col ion-button (click)="numero(item, -1)" item-end icon-only color="secondary">
+                  <ion-icon name="remove-circle"></ion-icon>
+                </ion-col>
+                <ion-col ion-button (click)="numero(item, 1)" item-end icon-only  color="secondary">
+                  <ion-icon name="add-circle"></ion-icon>
+                </ion-col>
+                <ion-col ion-button item-end (click)="editar(item)" icon-only color="secondary">
+                  <ion-icon name="create"></ion-icon>
+                </ion-col>
+                <ion-col  ion-button item-end (click)="remove(item)" icon-only color="danger">
+                  <ion-icon name="trash"></ion-icon>
+                </ion-col>
+              </ion-row>
           </ion-item>
       </ion-list>
       

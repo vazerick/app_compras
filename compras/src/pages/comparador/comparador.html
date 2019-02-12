@@ -24,7 +24,8 @@
       <ion-col>
         <ion-item>
           <ion-label color="primary" floating>Preço</ion-label>
-          <ion-input  type="number" [(ngModel)]="item.preco"></ion-input>
+          <ion-input  [ngModel]="item.preco | pipePreco"
+          (ngModelChange)="item.preco=$event" name="preco" type="number" step="0.01"></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>

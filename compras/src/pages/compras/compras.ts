@@ -225,7 +225,7 @@ export class ComprasPage {
   numero(item, soma) {
     let vezes = Number(item.vezes)+soma
     if (vezes > 0) {
-      this.arquivo.editar(item, item.nome, vezes).then( data => this.atualiza() );
+      this.arquivo.editar(item, item.nome, item.valor, vezes).then( data => this.atualiza() );
     }    
   }
 
@@ -252,7 +252,7 @@ export class ComprasPage {
         {
           text: 'Editar',
           handler: data => {
-            this.arquivo.editar(item, data.Nome, data.Vezes).then(data => {
+            this.arquivo.editar(item, data.Nome, item.valor, data.Vezes).then(data => {
               this.lista_fila[this.lista_fila.indexOf(item)] = data;
             });                                    
           }
@@ -290,7 +290,7 @@ export class ComprasPage {
         {
           text: 'Editar',
           handler: data => {                    
-            this.arquivo.editar(item, data.Nome, data.Vezes).then( novo => {
+            this.arquivo.editar(item, data.Nome, item.valor, data.Vezes).then( novo => {
               this.arquivo.addValor(novo, data.Valor).then(data => {
                 this.lista_comprado[this.lista_comprado.indexOf(item)] = data;
               });              

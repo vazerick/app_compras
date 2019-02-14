@@ -1,4 +1,4 @@
-import {Component, Pipe, PipeTransform} from '@angular/core';
+import {Component} from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import {pipePreco} from '../../pipes/preco';
 

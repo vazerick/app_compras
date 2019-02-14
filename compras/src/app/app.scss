@@ -14,11 +14,21 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
+.modal{
+    .scroll-content {
+        //overflow-y: hidden;
+    }
+    ion-col{
+     margin: 1%;
+    }
+    .dis {
+        background: rgba(150,150,200,0.5);
+    }
+}
 .modal-wrapper{
     position: absolute;
     width: 75%;
-    height: 50%;
+    height: 60%;
     top: 0;
     bottom: 25%;
     left: 0;

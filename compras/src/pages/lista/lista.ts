@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, reorderArray, ModalController  } from 'ionic-angular';
+import { IonicPage, reorderArray, NavController, NavParams, AlertController, ModalController  } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ArquivoProvider } from '../../providers/arquivo/arquivo'
 import { AdicionarPage } from '../../modal/adicionar/adicionar'
@@ -35,8 +35,8 @@ export class ListaPage {
 modal() {
   let profileModal = this.modalCtrl.create(
     AdicionarPage,
-    {valor: false},
-    {showBackdrop: true}
+    {valor: true},
+    {showBackdrop: false}
   );
   profileModal.present();
 
@@ -50,11 +50,10 @@ modal() {
   }
 
   numero(item, soma) {
-    let vezes = Number(item.vezes)+soma
+    let vezes = Number(item.vezes)+soma;
     if (vezes > 0) {
-      this.arquivo.editar(item, item.nome, vezes).then( data =>
-        this.lista[this.lista.indexOf(item)].vezes = vezes);
-    }    
+      this.arquivo.editar(item, item.nome, item.valor, vezes);
+    }
   }
 
   add() {
@@ -183,11 +182,12 @@ modal() {
         {
           text: 'Remover',
           handler: data => {
-            const index: number = this.lista.indexOf(item);
-            if (index !== -1) {
-                this.lista.splice(index, 1);
-                this.arquivo.salva(this.lista);
-            }    
+            this.arquivo.remove(item);
+            // const index: number = this.lista.indexOf(item);
+            // if (index !== -1) {
+            //     this.lista.splice(index, 1);
+            //     this.arquivo.salva(this.lista);
+            // }
           }
         }
       ]
@@ -209,8 +209,8 @@ modal() {
           {
               text: 'Sim',
               handler: () => {
-                this.lista = [];
                 this.arquivo.limpar();
+                this.arquivo.atualiza();
               }
           }
       ]
@@ -220,8 +220,7 @@ modal() {
   }
 
   reorder(ev) {
-    reorderArray(this.lista,ev);
-    this.arquivo.salva(this.lista);
+    this.arquivo.reordena(ev);
   }
 
   seleciona(item) {

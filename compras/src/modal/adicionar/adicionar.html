@@ -6,7 +6,11 @@
 -->
 
 <ion-content padding class="modal">
-  <h4>Adicionar Item</h4>
+    <button  ion-button clear color="danger" (click)="encerra()" icon-only float-right>
+        <ion-icon name="close-circle"></ion-icon>
+      </button>  
+    <h4>Adicionar Item</h4>    
+  
   <ion-item>
     <ion-label color="primary">Nome</ion-label>
     <ion-input [(ngModel)]="item.nome"  type="text"></ion-input>

@@ -45,7 +45,7 @@ export class AdicionarPage {
   adicionar() {
     if (this.item.nome!=null && this.item.preco>0 && this.item.preco>0) {
         this.arquivo.adicionar(this.item).then(data => {
-           this.viewCtrl.dismiss();
+           this.viewCtrl.dismiss(true);
         });
     }
   }
@@ -55,5 +55,10 @@ export class AdicionarPage {
     if (vezes > 0) {      
       item.vezes = vezes;
     }    
+  }
+
+  encerra() {
+    console.log("Fecha")
+    this.viewCtrl.dismiss(this.item);
   }
 }

@@ -32,7 +32,6 @@ export class ArquivoProvider {
       let lista: Array<any> = [];
       let limite: number = 0;
       this.storage.forEach( (element, key) => {
-        console.log("Atualiza:",key,element);
         if (key!='x') {
           lista.push({
             nome: element.nome,
@@ -109,6 +108,7 @@ export class ArquivoProvider {
         vezes: vezes
       };
       this.storage.set(item.chave, novo).then(data => this.atualiza());
+      resolve(true);
     })
   }
 

@@ -32,7 +32,7 @@ export class ListaPage {
   }
 
   
-modal() {
+adicionar() {
   let profileModal = this.modalCtrl.create(
     AdicionarPage,
     {valor: true},
@@ -47,14 +47,7 @@ modal() {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaPage');
-  }
-
-  numero(item, soma) {
-    let vezes = Number(item.vezes)+soma;
-    if (vezes > 0) {
-      this.arquivo.editar(item, item.nome, item.valor, vezes);
-    }
-  }
+  } 
 
   add() {
     let prompt = this.alertCtrl.create({
@@ -134,7 +127,7 @@ modal() {
           {
             text: 'Editar',
             handler: data => {
-              this.arquivo.editar(item, data.Nome, data.Vezes).then(data => {
+              this.arquivo.editar(item, data.Nome, item.valor, data.Vezes).then(data => {
                 this.lista[this.lista.indexOf(item)] = data;
               });                                    
             }
@@ -159,7 +152,7 @@ modal() {
           {
             text: 'Editar',
             handler: data => {
-              this.arquivo.editar(item, data.Nome, item.vezes).then(data => {
+              this.arquivo.editar(item, data.Nome, item.valor, item.vezes).then(data => {
                 this.arquivo.getLista().then( data => this.lista = data.total);
               }
               );                                    

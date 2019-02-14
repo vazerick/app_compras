@@ -20,12 +20,37 @@
     <ion-label color="primary">Quantidade</ion-label>
     <ion-input [(ngModel)]="item.vezes" type="number"></ion-input>
   </ion-item>
+  <!-- <ion-row>
+    <ion-col ion-button (click)="numero(item, -1)" item-end icon-only color="secondary" [ngClass]="item.vezes>1 ? 'hab' : 'dis'">
+      <ion-icon name="remove-circle"></ion-icon>
+    </ion-col>
+    <ion-col ion-button (click)="numero(item, 1)" item-end icon-only  color="secondary">
+      <ion-icon name="add-circle"></ion-icon>
+    </ion-col>
+  </ion-row> -->
+  
   <ion-row>
-    <ion-col>+</ion-col>
-    <ion-col>-</ion-col>
-  </ion-row>
+      <ion-col>
+        <ion-grid>
+          <button (click)="numero(item, -1)" expand="full" icon-only ion-button color="secondary" [disabled]="item.vezes<2">
+        <ion-icon name="remove-circle"></ion-icon>
+        </button>
+      </ion-grid>
+      </ion-col>
+      <ion-col>
+          <ion-grid>
+          <button (click)="numero(item, 1)" expand="full" icon-only ion-button color="secondary">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+          </ion-grid>
+      </ion-col>
+    </ion-row>  
+
   <br/>
-  <ion-row ion-button (click)="adicionar()" [ngClass]="item.nome && item.preco>0 && item.vezes>0 ? 'button' : 'dis'">
-    Adicionar
-  </ion-row>
+  <!-- <ion-row ion-button (click)="adicionar()" [ngClass]="item.nome && item.preco>0 && item.vezes>0 ? 'hab' : 'dis'"> -->
+  <ion-grid>
+    <button (click)="adicionar()" expand="full" ion-button [disabled]="!(item.nome && item.preco>0 && item.vezes>0)">
+        Adicionar
+    </button>    
+  </ion-grid>
 </ion-content>

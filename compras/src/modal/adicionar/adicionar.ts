@@ -49,4 +49,11 @@ export class AdicionarPage {
         });
     }
   }
+
+  numero(item, soma: number) {
+    let vezes = Number(item.vezes)+soma;
+    if (vezes > 0) {      
+      item.vezes = vezes;
+    }    
+  }
 }

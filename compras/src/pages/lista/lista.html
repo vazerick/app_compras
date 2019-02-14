@@ -16,13 +16,7 @@
 <ion-content padding>
 
     <ion-buttons end class='add'>
-        <button ion-button (click)="modal()">
-          TESTE
-        </button>
-    </ion-buttons>
-
-    <ion-buttons end class='add'>
-      <button ion-button icon-only (click)="add()">
+      <button ion-button icon-only (click)="adicionar()">
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
@@ -38,13 +32,7 @@
             <ng-template #unitario>
                 {{item.nome}}
             </ng-template>
-              <ion-row *ngIf="item.select">
-                <ion-col ion-button (click)="numero(item, -1)" item-end icon-only color="secondary">
-                  <ion-icon name="remove-circle"></ion-icon>
-                </ion-col>
-                <ion-col ion-button (click)="numero(item, 1)" item-end icon-only  color="secondary">
-                  <ion-icon name="add-circle"></ion-icon>
-                </ion-col>
+              <ion-row *ngIf="item.select">                
                 <ion-col ion-button item-end (click)="editar(item)" icon-only color="secondary">
                   <ion-icon name="create"></ion-icon>
                 </ion-col>

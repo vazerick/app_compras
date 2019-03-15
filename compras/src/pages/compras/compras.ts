@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { ArquivoProvider } from '../../providers/arquivo/arquivo'
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { ArquivoProvider } from '../../providers/arquivo/arquivo';
 import { templateSourceUrl } from '@angular/compiler';
+import { AdicionarPage } from '../../modal/adicionar/adicionar';
+import { EditarPage } from '../../modal/editar/editar';
+import { ComprarPage } from '../../modal/comprar/comprar';
 
 
 /**
@@ -18,8 +21,9 @@ import { templateSourceUrl } from '@angular/compiler';
 })
 export class ComprasPage {
 
-  lista_comprado = [];
+  lista = [];  
   lista_fila = [];
+  lista_comprado = [];
   gasto = 0;
   limite = 0;
   resta = 0;
@@ -29,18 +33,17 @@ export class ComprasPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public arquivo: ArquivoProvider
+    public arquivo: ArquivoProvider,
+    public modalCtrl: ModalController
     ) {            
       this.atualiza();
+      this.arquivo.getLista().then( data => this.lista = data.total);
   }
 
   atualiza(){
     console.log("Atualiza");  // todo tornar as listas uma promise para poupar processamento
     this.gasto = 0;  
-    this.arquivo.getLista().then( data => {      
-      this.lista_comprado = data.comprado;
-      this.lista_fila = data.fila;
-    });
+    this.arquivo.getLista().then(  data => this.lista = data.total );
     this.arquivo.getGasto().then( data => {
       this.gasto = data;
       this.resta = this.limite - this.gasto;
@@ -53,7 +56,48 @@ export class ComprasPage {
     this.arquivo.getLimite().then( data => this.limite = data.valor);
   }
 
-  add_lista() {
+  add(lista) {
+    let valor = false;
+    if (lista=="carrinho"){
+      valor = true;
+    }
+    let profileModal = this.modalCtrl.create(
+      AdicionarPage,
+      {valor: valor},
+      {showBackdrop: false}
+    );
+    profileModal.present();
+  
+    profileModal.onDidDismiss(data => {  
+      console.log(data);
+      this.atualiza();
+    });
+  }
+
+  editar(item, lista) {
+    console.log("Editar ",lista,":");
+    console.log(item);
+    let valor = false;
+    if (lista=="carrinho"){
+      valor = true;
+    }
+    let profileModal = this.modalCtrl.create(
+      EditarPage,
+      {
+        EditItem: item,
+        valor: valor
+      },      
+      {showBackdrop: false}
+    );
+    profileModal.present();
+  
+    profileModal.onDidDismiss(data => {  
+      console.log(data);
+      this.atualiza();
+    });
+  }
+
+  add_lista_old() {
     let lista: Array<any>
     this.arquivo.getLista().then( data => {
       lista = data.total;
@@ -105,7 +149,7 @@ export class ComprasPage {
     });    
   }  
 
-  add_carrinho() {
+  add_carrinho_old() {
     let lista: Array<any>
     this.arquivo.getLista().then( data => {
       lista = data.total;
@@ -162,8 +206,21 @@ export class ComprasPage {
       prompt.present();
     });    
   }  
-  
+
   comprar(item) {
+    let profileModal = this.modalCtrl.create(
+      ComprarPage,
+      {item: item},
+      {showBackdrop: false}
+    );
+    profileModal.present();
+  
+    profileModal.onDidDismiss(data => {  
+      console.log(data);
+    });
+  }
+  
+  comprar_old(item) {
     let prompt = this.alertCtrl.create({
       title: 'Comprar '+item.nome,
       message: 'Valor e quantidade',
@@ -319,6 +376,15 @@ export class ComprasPage {
       ]
     });    
     prompt.present();        
+  }
+
+  seleciona(item) {
+    item.select = ! item.select;
+    this.lista.forEach(element => {
+      if (element != item) {
+        element.select = false;
+      }
+    })
   }
 
 

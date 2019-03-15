@@ -17,9 +17,11 @@ import {ArquivoProvider} from "../../providers/arquivo/arquivo";
 })
 export class EditarPage {
 
+  valor: boolean;
+
   item = {
     nome: <string> null,
-    preco: <number> null,
+    valor: <number> null,
     vezes: <number> null
   };
 
@@ -37,9 +39,11 @@ export class EditarPage {
     public arquivo: ArquivoProvider,
     ) {
       this.item = params.get('EditItem');
+      this.valor = params.get('valor');
       this.item_edit.nome = this.item.nome;
-      this.item_edit.preco = this.item.preco;
+      this.item_edit.preco = this.item.valor;
       this.item_edit.vezes = this.item.vezes;
+      console.log("item_edit:", this.item_edit);
   }
 
   ionViewDidLoad() {
@@ -59,6 +63,7 @@ export class EditarPage {
   }
 
   editar() {
+    console.log(this.item_edit);
     this.arquivo.editar(this.item, this.item_edit.nome, this.item_edit.preco, this.item_edit.vezes).then(data => {
       this.viewCtrl.dismiss(true);
     })

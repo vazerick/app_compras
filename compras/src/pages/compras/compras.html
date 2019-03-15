@@ -51,15 +51,15 @@
   <ion-item-divider>
       Lista de Compras
       <ion-buttons item-end end>
-          <button ion-button icon-only (click)="add_lista()">
+          <button ion-button icon-only (click)="add('lista')">
             <ion-icon name="add"></ion-icon>
           </button>
       </ion-buttons>
   </ion-item-divider>
 
   <ion-list>
-      <div *ngFor="let item of arquivo.lista" text-wrap justify-content: center>
-        <ion-item *ngIf="item.valor==''">
+      <div *ngFor="let item of lista" text-wrap justify-content: center (click)="seleciona(item)" >
+        <ion-item *ngIf="item.valor == null">
           <div *ngIf="item.vezes>1; else unitario">
               <ion-badge slot="start" color="secondary">{{item.vezes}}</ion-badge>
               {{item.nome}}
@@ -67,18 +67,15 @@
           <ng-template #unitario>
               {{item.nome}}
           </ng-template>
-          <button ion-button (click)="numero(item, -1)" item-end icon-only clear color="secondary">
-            <ion-icon name="remove-circle"></ion-icon>
-          </button>
-          <button ion-button (click)="numero(item, 1)" item-end icon-only clear color="secondary">
-            <ion-icon name="add-circle"></ion-icon>
-          </button>
-          <button ion-button item-end (click)="editar_fila(item)" icon-only color="secondary">
-            <ion-icon name="create"></ion-icon>
-          </button>
-          <button ion-button item-end (click)="comprar(item)" icon-only color="secondary">
-            <ion-icon name="cart"></ion-icon>
-          </button>
+          <ion-row *ngIf="item.select">
+                <ion-col ion-button item-end (click)="editar(item, 'lista')" icon-only color="secondary">
+                  <ion-icon name="create"></ion-icon>
+                </ion-col>
+                <ion-col ion-button item-end (click)="comprar(item)" icon-only color="secondary">
+                  <ion-icon name="cart"></ion-icon>
+                </ion-col>
+          </ion-row>
+          
         </ion-item>
       </div>      
   </ion-list>
@@ -86,38 +83,32 @@
   <ion-item-divider>
     Carrinho
     <ion-buttons item-end end>
-        <button ion-button icon-only (click)="add_carrinho()">
+        <button ion-button icon-only (click)="add('carrinho')">
           <ion-icon name="add"></ion-icon>
         </button>
     </ion-buttons>    
   </ion-item-divider>
   
     <ion-list>
-      <div text-wrap *ngFor="let item of arquivo.lista">
-        <ion-item *ngIf="item.valor!=''">
+      <div text-wrap *ngFor="let item of lista" (click)="seleciona(item)">
+        <ion-item *ngIf="item.valor!= null">
           <p>
             {{item.nome}}
           </p>
           <p>
-            {{item.valor*item.vezes | currency:'BRL'}}
+            <sup>{{item.valor*item.vezes | currency:'BRL'}}</sup>
           </p>
           <p *ngIf="item.vezes>1">
-            <sup>
-              ({{item.valor | currency:'BRL'}} x {{item.vezes}})
-            </sup>
+              <sup>({{item.valor | currency:'BRL'}} x {{item.vezes}})</sup>
           </p>
-          <button ion-button (click)="numero(item, -1)" item-end icon-only clear color="secondary">
-            <ion-icon name="remove-circle"></ion-icon>
-          </button>
-          <button ion-button (click)="numero(item, 1)" item-end icon-only clear color="secondary">
-            <ion-icon name="add-circle"></ion-icon>
-          </button>
-          <button ion-button item-end (click)="editar_comprado(item)" icon-only color="secondary">
+          <ion-row *ngIf="item.select">
+          <ion-col ion-button item-end (click)="editar(item, 'carrinho')" icon-only color="secondary">
             <ion-icon name="create"></ion-icon>
-          </button>
-          <button ion-button item-end (click)="remover(item)" icon-only color="danger">
+          </ion-col>
+          <ion-col ion-button item-end (click)="remover(item)" icon-only color="danger">
             <ion-icon name="trash"></ion-icon>
-          </button>
+          </ion-col>
+        </ion-row>
         </ion-item>
       </div>
   </ion-list>

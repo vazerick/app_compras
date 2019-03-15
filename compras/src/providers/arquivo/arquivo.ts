@@ -65,6 +65,9 @@ export class ArquivoProvider {
       this.storage.length().then( num_arquivo => {
         let chave = (num_arquivo-1).toString();
         this.geraChave(chave).then(data => {
+          if (item.valor == null && item.preco) {
+            item.valor = item.preco;
+          }
           this.storage.set(data,
             {
               nome: item.nome,
@@ -227,10 +230,15 @@ export class ArquivoProvider {
       var lista_fila = [];
       this.storage.forEach( (element, key) => {
         if (key!="x") {
-          if (element.valor == ""){
+          console.log(element);
+          if(element.valor == undefined) {
+            console.log("Undefined!");
+          }
+          if (element.valor == undefined){
             lista_fila.push({          
               nome: element.nome,
               vezes: element.vezes,
+              select: false,
               chave: key
             });
           } else {
@@ -238,6 +246,7 @@ export class ArquivoProvider {
               nome: element.nome,
               valor: element.valor,
               vezes: element.vezes,
+              select: false,
               chave: key
             });
           }
@@ -245,6 +254,7 @@ export class ArquivoProvider {
             nome: element.nome,
             valor: element.valor,
             vezes: element.vezes,
+            select: false,
             chave: key
           });
         }      

@@ -32,8 +32,12 @@ export class AdicionarPage {
     public arquivo: ArquivoProvider,
     ) {
       this.valor = params.get('valor');
-      this.item.preco = 0.0;
-      this.item.vezes = 1;
+      if (!this.valor) {
+        this.item.preco = null;
+      } else {
+        this.item.preco = 0.0;
+      }
+      this.item.vezes = 1;      
       console.log("Valor:", params.get('valor'));
   }
 
@@ -45,6 +49,7 @@ export class AdicionarPage {
   adicionar() {
     this.arquivo.adicionar(this.item).then(data => {
       this.viewCtrl.dismiss(true);
+      console.log("Add:", this.item);
    });
   }
 

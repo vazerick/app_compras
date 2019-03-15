@@ -49,7 +49,10 @@ adicionar() {
 editar(item) {
   let profileModal = this.modalCtrl.create(
     EditarPage,
-    {EditItem: item},
+    {
+      EditItem: item,
+    valor: false
+    },
     {showBackdrop: false}
   );
   profileModal.present();
@@ -237,6 +240,7 @@ editar(item) {
         element.select = false;
       }
     })
+    console.log(this.lista);
   }
 
   

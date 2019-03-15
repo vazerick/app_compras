@@ -3,6 +3,7 @@ import { IonicPage, reorderArray, NavController, NavParams, AlertController, Mod
 import { HomePage } from '../home/home';
 import { ArquivoProvider } from '../../providers/arquivo/arquivo'
 import { AdicionarPage } from '../../modal/adicionar/adicionar'
+import { EditarPage } from '../../modal/editar/editar';
 
 /**
  * Generated class for the ListaPage page.
@@ -35,7 +36,20 @@ export class ListaPage {
 adicionar() {
   let profileModal = this.modalCtrl.create(
     AdicionarPage,
-    {valor: true},
+    {valor: false},
+    {showBackdrop: false}
+  );
+  profileModal.present();
+
+  profileModal.onDidDismiss(data => {  
+    console.log(data);
+  });
+}
+
+editar(item) {
+  let profileModal = this.modalCtrl.create(
+    EditarPage,
+    {EditItem: item},
     {showBackdrop: false}
   );
   profileModal.present();
@@ -102,7 +116,7 @@ adicionar() {
     prompt.present();
   }
 
-  editar(item) {    
+  editar_old(item) {    
     if (item.valor == ""){
       let prompt = this.alertCtrl.create({
         title: 'Editar ' + item.nome,

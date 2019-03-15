@@ -43,11 +43,9 @@ export class AdicionarPage {
 
 
   adicionar() {
-    if (this.item.nome!=null && this.item.preco>0 && this.item.preco>0) {
-        this.arquivo.adicionar(this.item).then(data => {
-           this.viewCtrl.dismiss(true);
-        });
-    }
+    this.arquivo.adicionar(this.item).then(data => {
+      this.viewCtrl.dismiss(true);
+   });
   }
 
   numero(item, soma: number) {

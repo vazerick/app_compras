@@ -52,8 +52,13 @@
 
   <br/>
   <!-- <ion-row ion-button (click)="adicionar()" [ngClass]="item.nome && item.preco>0 && item.vezes>0 ? 'hab' : 'dis'"> -->
-  <ion-grid>
+  <ion-grid *ngIf="valor">
     <button (click)="adicionar()" expand="full" ion-button [disabled]="!(item.nome && item.preco>0 && item.vezes>0)">
+        Adicionar
+    </button>    
+  </ion-grid>
+  <ion-grid *ngIf="!valor">
+    <button (click)="adicionar()" expand="full" ion-button [disabled]="!(item.nome && item.vezes>0)">
         Adicionar
     </button>    
   </ion-grid>
